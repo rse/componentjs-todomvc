@@ -5,6 +5,16 @@
 
 > _[ComponentJS - componentjs.com](http://componentjs.com)_
 
+## Running ComponentJS TodoMVC Example
+
+First, you have to install all third-party libraries through Twitter Bower:
+
+    $ bower install
+
+Then access the `index.html` file through a HTTP[S] URL (because URLs
+based on the `file` scheme will not work due to browser security
+constraints on the used AJAX operations).
+
 ## Learning ComponentJS
 
 The [ComponentJS website](http://componentjs.com) is a great resource for getting started.
