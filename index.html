@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" data-framework="componentjs">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>ComponentJS • TodoMVC</title>
+
+        <!-- load third-party libraries -->
+        <script src="bower_components/lodash/dist/lodash.js"                    type="text/javascript"></script>
+        <script src="bower_components/nunjucks/browser/nunjucks.js"             type="text/javascript"></script>
+        <script src="bower_components/jquery/jquery.js"                         type="text/javascript"></script>
+        <script src="bower_components/jquery-markup/jquery.markup.js"           type="text/javascript"></script>
+        <script src="bower_components/director/build/director.js"               type="text/javascript"></script>
+        <script src="bower_components/componentjs/component.js"                 type="text/javascript"></script>
+        <script src="bower_components/componentjs/component.plugin.debugger.js" type="text/javascript"></script>
+        <script src="bower_components/componentjs/component.plugin.jquery.js"   type="text/javascript"></script>
+
+        <!-- load and call application initialization code -->
+        <script src="app/app.js"                                 type="text/javascript"></script>
+        <script type="text/javascript">app.boot.init()</script>
+
+        <!-- load the service code -->
+        <script src="app/app-sv.js"                              type="text/javascript"></script>
+        <script src="app/app-util.js"                            type="text/javascript"></script>
+
+        <!-- load the root UI component -->
+        <script src="app/app-ui.js"                              type="text/javascript"></script>
+
+        <!-- load the main UI component -->
+        <script src="app/app-ui-main-view.js"                    type="text/javascript"></script>
+        <script src="app/app-ui-main-model.js"                   type="text/javascript"></script>
+        <script src="app/app-ui-main-ctrl.js"                    type="text/javascript"></script>
+        <link  href="app/app-ui-main-mask.html" rel="markup"     type="text/x-markup-nunjucks"/>
+        <link  href="app/app-ui-main-style.css" rel="stylesheet" type="text/css"/>
+
+        <!-- load the todo UI component -->
+        <script src="app/app-ui-todo-view.js"                    type="text/javascript"></script>
+        <script src="app/app-ui-todo-model.js"                   type="text/javascript"></script>
+        <script src="app/app-ui-todo-ctrl.js"                    type="text/javascript"></script>
+        <link  href="app/app-ui-todo-mask.html" rel="markup"     type="text/x-markup-nunjucks"/>
+        <link  href="app/app-ui-todo-style.css" rel="stylesheet" type="text/css"/>
+
+        <!-- call application main code -->
+        <script type="text/javascript">app.boot.main()</script>
+    </head>
+    <body>
+    </body>
+</html>
