@@ -84,7 +84,7 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            clean:     [ ],
+            clean:     [ "lib" ],
             distclean: [ "bower_components", "node_modules" ]
         }
     });
