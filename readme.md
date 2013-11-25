@@ -7,13 +7,12 @@
 
 ## Running ComponentJS TodoMVC Example
 
-First, you have to install all third-party libraries through Twitter Bower:
+Perform the following steps:
 
-    $ bower install
-
-Then access the `index.html` file through a HTTP[S] URL (because URLs
-based on the `file` scheme will not work due to browser security
-constraints on the used AJAX operations).
+1. Install [Node](http://nodejs.org/) into your system
+2. Install dependencies via [NPM](http://npmjs.org/): `npm install`
+3. Run [Grunt](http://gruntjs.com/): `grunt default dev`
+4. Connect to http://localhost:8080/
 
 ## Learning ComponentJS
 
