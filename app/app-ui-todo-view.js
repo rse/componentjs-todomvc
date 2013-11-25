@@ -9,7 +9,7 @@ cs.ns("app.ui.todo").view = cs.clazz({
             cs(self).plug(self.ui)
 
             /*  two-way bind all items selection checkbox  */
-            $("#toggle-all").change(function (ev) {
+            $("#toggle-all").change(function (/* ev */) {
                 cs(self).value("state:all-item-selected", $("#toggle-all").prop("checked"))
             })
             cs(self).observe({
@@ -18,10 +18,10 @@ cs.ns("app.ui.todo").view = cs.clazz({
             })
 
             /*  two-way bind new item text input field  */
-            $("#new-todo").keyup(function (ev) {
+            $("#new-todo").keyup(function (/* ev */) {
                 cs(self).value("data:new-item-text", $("#new-todo").val())
             })
-            $("#new-todo").change(function (ev) {
+            $("#new-todo").change(function (/* ev */) {
                 cs(self).value("event:new-item-create", true)
             })
             cs(self).observe({
@@ -33,10 +33,10 @@ cs.ns("app.ui.todo").view = cs.clazz({
             cs(self).observe({
                 name: "data:status-items-remaining",
                 spool: "materialized", touch: true,
-                func: function (ev, value) { 
+                func: function (ev, value) {
                     $("*[data-bind='data:status-items-remaining']", self.ui).text(value)
                     $("*[data-bind='data:status-items-remaining-unit']", self.ui).text(
-                        value == 1 ? "item" : "items")
+                        parseInt(value) === 1 ? "item" : "items")
                 }
             })
 
@@ -44,7 +44,7 @@ cs.ns("app.ui.todo").view = cs.clazz({
             cs(self).observe({
                 name: "state:status-filter-selected",
                 spool: "materialized", touch: true,
-                func: function (ev, value) { 
+                func: function (ev, value) {
                     $("*[data-bind='state:status-filter-selected'] > li > a", self.ui).removeClass("selected")
                     $("*[data-bind='state:status-filter-selected'] > li > "+
                         "a[data-tag='" + value + "']", self.ui).addClass("selected")
@@ -60,7 +60,7 @@ cs.ns("app.ui.todo").view = cs.clazz({
             cs(self).observe({
                 name: "data:status-items-completed",
                 spool: "materialized", touch: true,
-                func: function (ev, value) { 
+                func: function (ev, value) {
                     if (value > 0) {
                         $("#clear-completed", self.ui).css("display", "block")
                         $("*[data-bind='data:status-items-completed']", self.ui).text(value)
@@ -69,7 +69,7 @@ cs.ns("app.ui.todo").view = cs.clazz({
                         $("#clear-completed", self.ui).css("display", "none")
                 }
             })
-            $("#clear-completed", self.ui).click(function (ev) {
+            $("#clear-completed", self.ui).click(function (/* ev */) {
                 cs(self).value("data:item-list",
                     _.filter(cs(self).value("data:item-list"), function (item) {
                         return !item.completed;
@@ -78,16 +78,16 @@ cs.ns("app.ui.todo").view = cs.clazz({
                 cs(self).value("cmd:item-list-updated", true)
             })
 
-            /*  two-way bind the list of items  */ 
+            /*  two-way bind the list of items  */
             cs(self).observe({
                 name: "cmd:item-list-updated",
                 spool: "materialized", touch: true,
-                func: function (ev, value) { 
+                func: function (/* ev, value */) {
                     $("#todo-list", self.ui).html("")
                     var items = cs(self).value("data:item-list")
                     var filter = cs(self).value("state:status-filter-selected")
                     for (var i = 0; i < items.length; i++) {
-                        if (   filter === "all" 
+                        if (   filter === "all"
                             || (filter === "active"    && !items[i].completed)
                             || (filter === "completed" &&  items[i].completed)) {
                             var item = $.markup("todo/item", {
@@ -134,7 +134,6 @@ cs.ns("app.ui.todo").view = cs.clazz({
                     })
                     $("#todo-list button.destroy", self.ui).click(function (ev) {
                         var id = $(ev.target).parent().parent().data("id");
-                        var idx = 0
                         cs(self).value("data:item-list", _.filter(items, function (item) {
                             return (item.id !== id);
                         }))

@@ -15,7 +15,7 @@ cs.ns("app.ui.todo").model = cs.clazz({
                 "data:new-item-text":               { value: "",    valid: "string",  store: true     },
                 "event:new-item-create":            { value: false, valid: "boolean", autoreset: true },
                 "data:status-items-remaining":      { value: 0,     valid: "number"                   },
-                "data:status-items-remaining-unit": { value: "",     valid: "string"                  },
+                "data:status-items-remaining-unit": { value: "",    valid: "string"                   },
                 "state:status-filter-selected":     { value: "all", valid: "string",  store: true     },
                 "event:status-filter-select":       { value: "",    valid: "string",  autoreset: true },
                 "data:status-items-completed":      { value: 0,     valid: "number"                   },
@@ -35,7 +35,7 @@ cs.ns("app.ui.todo").model = cs.clazz({
             cs(self).observe({
                 name: "cmd:item-list-updated",
                 touch: true,
-                func: function (ev, value) {
+                func: function (/* ev, value */) {
                     var items = cs(self).value("data:item-list")
                     var completed = _.countBy(items, function (item) { return item.completed }).true
                     if (!_.isNumber(completed))

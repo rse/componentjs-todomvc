@@ -18,7 +18,7 @@ cs.ns("app.ui.todo").ctrl = cs.clazz({
             ])
             cs(self, "model").observe({
                 name: "event:new-item-create",
-                func: function (ev, value) {
+                func: function (/* ev, value */) {
                     var text = cs(self, "model").value("data:new-item-text")
                     var items = cs(self, "model").value("data:item-list")
                     items.push({
@@ -33,9 +33,9 @@ cs.ns("app.ui.todo").ctrl = cs.clazz({
             })
             cs(self, "model").observe({
                 name: "cmd:item-list-updated",
-                func: function (ev, value) {
-                    var items = cs(self, "model").value("data:item-list")
+                func: function (/* ev, value */) {
                     /*  FIXME: save to business model  */
+                    //  var items = cs(self, "model").value("data:item-list")
                 }
             })
         },
