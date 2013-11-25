@@ -1,0 +1,30 @@
+{
+    "name":        "componentjs-todomvc",
+    "version":     "0.0.0",
+    "description": "ComponentJS TodoMVC Example",
+    "repository": {
+        "type": "git",
+        "url":  "https://github.com/rse/componentjs-todomvc.git"
+    },
+    "author": {
+        "name":  "Ralf S. Engelschall",
+        "email": "rse@engelschall.com",
+        "url":   "http://engelschall.com"
+    },
+    "licenses": [{
+        "type": "MIT",
+        "url":  "http://opensource.org/licenses/MIT"
+    }],
+    "homepage": "https://github.com/rse/componentjs-todomvc",
+    "bugs":     "https://github.com/rse/componentjs-todomvc/issues",
+    "devDependencies": {
+        "grunt":                 "~0.4.2",
+        "grunt-cli":             "~0.1.11",
+        "grunt-bower-depend":    "~0.1.1",
+        "grunt-contrib-copy":    "~0.4.1",
+        "grunt-contrib-jshint":  "~0.7.2",
+        "grunt-contrib-connect": "~0.5.0",
+        "grunt-contrib-watch":   "~0.5.3",
+        "grunt-contrib-clean":   "~0.5.0"
+    }
+}

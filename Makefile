@@ -1,7 +1,21 @@
 
-bower:
-	bower install
+NPM   = npm
+GRUNT = ./node_modules/grunt-cli/bin/grunt 
 
-lint:
-	jshint --config jshint.json --verbose app/*.js
+all: build
+
+bootstrap:
+	@if [ ! -x $(GRUNT) ]; then $(NPM) install; fi
+
+build: bootstrap
+	@$(GRUNT)
+
+server: build
+	@$(GRUNT) connect:server:keepalive
+
+clean: bootstrap
+	@$(GRUNT) clean:clean
+
+distclean: bootstrap
+	@$(GRUNT) clean:clean clean:distclean
 
