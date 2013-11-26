@@ -8,9 +8,6 @@ cs.ns("app.ui.main").view = cs.clazz({
             self.ui = $.markup("main")
             cs(self).plug(self.ui)
             cs(self).socket({ ctx: $("#todoapp", self.ui), spool: "materialized" });
-        },
-        release: function () {
-            cs(this).unspool("materialized")
         }
     }
 })

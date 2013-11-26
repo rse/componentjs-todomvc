@@ -55,10 +55,7 @@ cs.ns("app.ui.todo").model = cs.clazz({
                     cs(self).value("cmd:item-list-updated", true)
                 }
             })
-        },
-        cleanup: function () {
-            cs(this).unspool("prepared")
-        },
+        }
     }
 })
 

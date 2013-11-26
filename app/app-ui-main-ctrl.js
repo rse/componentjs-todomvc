@@ -37,9 +37,6 @@ cs.ns("app.ui.main").ctrl = cs.clazz({
             })
         },
         cleanup: function () {
-            /*  unspool operations  */
-            cs(this).unspool("prepared")
-
             /*  save business model and unlink from presentation model  */
             app.sv.sf.save()
             cs(this, "model").value("data:todo", null)

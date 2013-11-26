@@ -5,6 +5,7 @@ cs.ns("app.ui.todo").view = cs.clazz({
         render: function () {
             var self = this
 
+            /*  render outer view mask  */
             self.ui = $.markup("todo")
             cs(self).plug(self.ui)
 
@@ -141,9 +142,6 @@ cs.ns("app.ui.todo").view = cs.clazz({
                     })
                 }
             })
-        },
-        release: function () {
-            cs(this).unspool("materialized")
         }
     }
 })
