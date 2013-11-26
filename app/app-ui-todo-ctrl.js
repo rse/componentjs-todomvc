@@ -38,9 +38,6 @@ cs.ns("app.ui.todo").ctrl = cs.clazz({
                     //  var items = cs(self, "model").value("data:item-list")
                 }
             })
-        },
-        cleanup: function () {
-            cs(this).unspool("prepared")
         }
     }
 })
