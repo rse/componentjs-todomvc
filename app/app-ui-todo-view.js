@@ -5,8 +5,8 @@ cs.ns("app.ui.todo").view = cs.clazz({
         render: function () {
             /*  render outer view mask  */
             var self = this
-            self.ui = $.markup("todo")
-            cs(self).plug(self.ui)
+            var ui = $.markup("todo")
+            cs(self).plug(ui)
 
             /*  two-way bind all items selection checkbox  */
             $("#toggle-all").change(function (/* ev */) {
@@ -34,8 +34,8 @@ cs.ns("app.ui.todo").view = cs.clazz({
                 name: "data:status-items-remaining",
                 spool: "materialized", touch: true,
                 func: function (ev, value) {
-                    $("*[data-bind='data:status-items-remaining']", self.ui).text(value)
-                    $("*[data-bind='data:status-items-remaining-unit']", self.ui).text(
+                    $("*[data-bind='data:status-items-remaining']", ui).text(value)
+                    $("*[data-bind='data:status-items-remaining-unit']", ui).text(
                         parseInt(value) === 1 ? "item" : "items")
                 }
             })
@@ -45,12 +45,12 @@ cs.ns("app.ui.todo").view = cs.clazz({
                 name: "state:status-filter-selected",
                 spool: "materialized", touch: true,
                 func: function (ev, value) {
-                    $("*[data-bind='state:status-filter-selected'] > li > a", self.ui).removeClass("selected")
+                    $("*[data-bind='state:status-filter-selected'] > li > a", ui).removeClass("selected")
                     $("*[data-bind='state:status-filter-selected'] > li > "+
-                        "a[data-tag='" + value + "']", self.ui).addClass("selected")
+                        "a[data-tag='" + value + "']", ui).addClass("selected")
                 }
             })
-            $("*[data-bind='state:status-filter-selected'] > li > a", self.ui).click(function (ev) {
+            $("*[data-bind='state:status-filter-selected'] > li > a", ui).click(function (ev) {
                 cs(self).value("state:status-filter-selected", $(ev.target).data("tag")) /* FIXME? */
                 cs(self).value("event:status-filter-select", $(ev.target).data("tag"))
                 cs(self).value("cmd:item-list-updated", true)
@@ -62,14 +62,14 @@ cs.ns("app.ui.todo").view = cs.clazz({
                 spool: "materialized", touch: true,
                 func: function (ev, value) {
                     if (value > 0) {
-                        $("#clear-completed", self.ui).css("display", "block")
-                        $("*[data-bind='data:status-items-completed']", self.ui).text(value)
+                        $("#clear-completed", ui).css("display", "block")
+                        $("*[data-bind='data:status-items-completed']", ui).text(value)
                     }
                     else
-                        $("#clear-completed", self.ui).css("display", "none")
+                        $("#clear-completed", ui).css("display", "none")
                 }
             })
-            $("#clear-completed", self.ui).click(function (/* ev */) {
+            $("#clear-completed", ui).click(function (/* ev */) {
                 cs(self).value("data:item-list",
                     _.filter(cs(self).value("data:item-list"), function (item) {
                         return !item.completed;
@@ -85,29 +85,28 @@ cs.ns("app.ui.todo").view = cs.clazz({
                 func: function (/* ev, value */) {
                     var items  = cs(self).value("data:item-list")
                     var filter = cs(self).value("state:status-filter-selected")
-                    $("#todo-list", self.ui).html("")
+                    $("#todo-list", ui).html("")
                     for (var i = 0; i < items.length; i++) {
                         if (    filter === "all"
                             || (filter === "active"    && !items[i].completed)
                             || (filter === "completed" &&  items[i].completed)) {
                             var item = $.markup("todo/item", items[i])
-                            $("#todo-list", self.ui).append(item)
+                            $("#todo-list", ui).append(item)
                         }
                     }
-                    $("#todo-list .view label", self.ui).bind("dblclick", function (ev) {
+                    $("#todo-list .view label", ui).bind("dblclick", function (ev) {
                         var title = $(ev.target).text()
                         var parent = $(ev.target).parent().parent()
                         parent.addClass("editing")
                         $(".edit", parent).val(title)
                         $(".edit", parent).focus()
                     })
-                    $("#todo-list .edit", self.ui).bind("keyup", function (ev) {
+                    $("#todo-list .edit", ui).keyup(function (ev) {
                         if (ev.which === app.ui.constants.KEY_ENTER)
                             blur(ev.target, true)
                         else if (ev.which === app.ui.constants.KEY_ESCAPE)
                             blur(ev.target, false)
-                    })
-                    $("#todo-list .edit", self.ui).blur(function (ev) {
+                    }).blur(function (ev) {
                         if ($(ev.target).parent().hasClass("editing"))
                             blur(ev.target, true)
                     })
@@ -115,18 +114,17 @@ cs.ns("app.ui.todo").view = cs.clazz({
                         var id = $(el).parent().data("id")
                         $(el).parent().removeClass("editing")
                         if (takeTitle) {
-                            var title = $(el).val()
-                            _.find(items, function (item) { return item.id === id }).title = title
+                            _.find(items, function (item) { return item.id === id }).title = $(el).val()
                             cs(self).value("cmd:item-list-updated", true)
                         }
                     }
-                    $("#todo-list input.toggle", self.ui).click(function (ev) {
+                    $("#todo-list input.toggle", ui).click(function (ev) {
                         var id = $(ev.target).parent().parent().data("id")
                         var item = _.find(items, function (item) { return item.id === id })
                         item.completed = !item.completed
                         cs(self).value("cmd:item-list-updated", true)
                     })
-                    $("#todo-list button.destroy", self.ui).click(function (ev) {
+                    $("#todo-list button.destroy", ui).click(function (ev) {
                         var id = $(ev.target).parent().parent().data("id")
                         cs(self).value("data:item-list", _.filter(items, function (item) {
                             return (item.id !== id);
