@@ -3,8 +3,10 @@
 module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
-        bower_depend: {
-            dummy: {}
+        "bower-install-simple": {
+            options: {
+                directory: "bower_components"
+            }
         },
         copy: {
             "componentjs": {
@@ -89,14 +91,14 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.loadNpmTasks("grunt-bower-depend");
+    grunt.loadNpmTasks("grunt-bower-install-simple");
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-contrib-connect");
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-contrib-clean");
 
-    grunt.registerTask("default", [ "bower_depend", "copy", "jshint" ]);
+    grunt.registerTask("default", [ "bower-install-simple", "copy", "jshint" ]);
     grunt.registerTask("dev",     [ "connect", "watch" ]);
 };
 
