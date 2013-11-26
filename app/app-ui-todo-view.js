@@ -106,9 +106,9 @@ cs.ns("app.ui.todo").view = cs.clazz({
                         $(".edit", $(ev.target).parent().parent()).focus()
                     })
                     $("#todo-list .edit", self.ui).bind("keyup", function (ev) {
-                        if (ev.which === app.util.constants.ENTER_KEY)
+                        if (ev.which === app.ui.constants.ENTER_KEY)
                             blur(ev.target, true)
-                        else if (ev.which === app.util.constants.ESCAPE_KEY)
+                        else if (ev.which === app.ui.constants.ESCAPE_KEY)
                             blur(ev.target, false)
                     })
                     $("#todo-list .edit", self.ui).blur(function (ev) {
