@@ -38,6 +38,6 @@ cs.ns("app.ui").root = cs.clazz({
 
 /*  just some constants  */
 cs.ns("app.ui").constants = {
-    ENTER_KEY:  13,
-    ESCAPE_KEY: 27
+    KEY_ENTER:  13,
+    KEY_ESCAPE: 27
 };
