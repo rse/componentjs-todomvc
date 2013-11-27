@@ -1,10 +1,9 @@
 
 /*  service facade  */
 cs.ns("app.sv").sf = new cs.clazz({
-    dynamics: {
-        todoList: null
-    },
+    dynamics: { todoList: null },
     protos: {
+        todo: function () { return this.todoList },
         load: function () {
             this.todoList = new app.sv.dm.TodoList()
             if (_.has(localStorage, "todomvc-componentjs"))
@@ -13,31 +12,20 @@ cs.ns("app.sv").sf = new cs.clazz({
         save: function () {
             if (this.todoList !== null)
                 localStorage["todomvc-componentjs"] = this.todoList.serialize()
-        },
-        todo: function () {
-            return this.todoList
         }
     }
 })()
 
 /*  data model: Todo List entity  */
 cs.ns("app.sv.dm").TodoList = cs.clazz({
-    dynamics: {
-        items: []
-    },
+    dynamics: { items: [] },
     cons: function (obj) {
         _.assign(this, _.pick(obj, function (val, key) { return _.has(self, key) }, this))
     },
     protos: {
-        itemAdd: function (item) {
-            this.items.push(item)
-        },
-        itemDel: function (item) {
-            this.items = _.without(this.items, item)
-        },
-        itemById: function (id) {
-            return _.find(this.items, function (item) { return item.id === id })
-        },
+        itemAdd:  function (item) { this.items.push(item) },
+        itemDel:  function (item) { this.items = _.without(this.items, item) },
+        itemById: function (id)   { return _.find(this.items, function (item) { return item.id === id }) },
         serialize: function () {
             return ("{\"items\":[" +
                 _.map(this.items, function (item) { return item.serialize() }).join(",") +
@@ -55,11 +43,7 @@ cs.ns("app.sv.dm").TodoList = cs.clazz({
 /*  data model: Todo Item entity  */
 cs.ns("app.sv.dm").idCnt = 0
 cs.ns("app.sv.dm").TodoItem = cs.clazz({
-    dynamics: {
-        id:        "0",
-        title:     "",
-        completed: false
-    },
+    dynamics: { id: "0", title: "", completed: false },
     cons: function (obj) {
         this.id = "" + app.sv.dm.idCnt++
         _.assign(this, _.pick(obj, function (val, key) { return _.has(this, key) }, this))
