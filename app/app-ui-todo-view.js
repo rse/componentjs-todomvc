@@ -111,12 +111,13 @@ cs.ns("app.ui.todo").view = cs.clazz({
                     $("*[data-bind='state:status-filter-selected'] > li > a", ui).removeClass("selected")
                     $("*[data-bind='state:status-filter-selected'] > li > "+
                         "a[data-tag='" + value + "']", ui).addClass("selected")
+                    cs(self).value("cmd:item-list-updated", true)
                 }
             })
             $("*[data-bind='state:status-filter-selected'] > li > a", ui).click(function (ev) {
-                cs(self).value("state:status-filter-selected", $(ev.target).data("tag")) /* FIXME? */
                 cs(self).value("event:status-filter-select", $(ev.target).data("tag"))
                 cs(self).value("cmd:item-list-updated", true)
+                return false
             })
 
             /*  two-way bind status clear item button  */
