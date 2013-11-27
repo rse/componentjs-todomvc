@@ -115,9 +115,9 @@ cs.ns("app.ui.todo").view = cs.clazz({
                 name: "state:status-filter-selected",
                 spool: "materialized", touch: true,
                 func: function (ev, value) {
-                    $("*[data-bind='state:status-filter-selected'] > li > a", ui).removeClass("selected")
-                    $("*[data-bind='state:status-filter-selected'] > li > "+
-                        "a[data-tag='" + value + "']", ui).addClass("selected")
+                    var a = $("*[data-bind='state:status-filter-selected'] > li > a", ui)
+                    a.removeClass("selected")
+                    a.filter("*[data-tag='" + value + "']").addClass("selected")
                 }
             })
             $("*[data-bind='state:status-filter-selected'] > li > a", ui).click(function (ev) {
