@@ -111,7 +111,6 @@ cs.ns("app.ui.todo").view = cs.clazz({
                     $("*[data-bind='state:status-filter-selected'] > li > a", ui).removeClass("selected")
                     $("*[data-bind='state:status-filter-selected'] > li > "+
                         "a[data-tag='" + value + "']", ui).addClass("selected")
-                    cs(self).value("cmd:item-list-updated", true)
                 }
             })
             $("*[data-bind='state:status-filter-selected'] > li > a", ui).click(function (ev) {
