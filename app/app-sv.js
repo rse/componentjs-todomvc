@@ -35,15 +35,6 @@ cs.ns("app.sv.dm").TodoList = cs.clazz({
         itemDel: function (item) {
             this.items = _.without(this.items, item)
         },
-        itemCompleted: function () {
-            return _.countBy(this.items, function (item) { return item.completed }).true
-        },
-        itemTotal: function () {
-            return this.items.length
-        },
-        itemLeft: function () {
-            return (this.itemTotal() - this.itemCompleted())
-        },
         itemById: function (id) {
             return _.find(this.items, function (item) { return item.id === id })
         },
