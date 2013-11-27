@@ -24,34 +24,35 @@ cs.ns("app.ui.todo").model = cs.clazz({
         },
         prepare: function () {
             var self = this
+
+            /*  presentation logic: determine singular/plural of remaining items unit  */
             cs(self).observe({
-                name: "data:status-items-remaining",
-                touch: true,
+                name: "data:status-items-remaining", touch: true,
                 func: function (ev, value) {
                     cs(self).value("data:status-items-remaining-unit",
                         value !== 1 ? "items" : "item")
                 }
             })
+
+            /*  presentation logic: determine number of completed and remaining items  */
             cs(self).observe({
-                name: "cmd:item-list-updated",
-                touch: true,
+                name: "cmd:item-list-updated", touch: true,
                 func: function (/* ev, value */) {
                     var items = cs(self).value("data:item-list")
                     var completed = _.countBy(items, function (item) { return item.completed }).true
-                    if (!_.isNumber(completed))
-                        completed = 0
-                    cs(self).value("data:status-items-completed", completed)
+                    if (!_.isNumber(completed)) completed = 0
                     var remaining = items.length - completed
+                    cs(self).value("data:status-items-completed", completed)
                     cs(self).value("data:status-items-remaining", remaining)
                 }
             })
+
+            /*  presentation logic: implement "all item selected"  */
             cs(self).observe({
                 name: "state:all-item-selected",
                 func: function (ev, value) {
                     var items = cs(self).value("data:item-list")
-                    _.forEach(items, function (item) {
-                        item.completed = value
-                    })
+                    _.forEach(items, function (item) { item.completed = value })
                     cs(self).value("cmd:item-list-updated", true)
                 }
             })
