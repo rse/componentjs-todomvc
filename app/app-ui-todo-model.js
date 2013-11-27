@@ -14,6 +14,8 @@ cs.ns("app.ui.todo").model = cs.clazz({
                 "state:all-item-selected":          { value: false, valid: "boolean"                  },
                 "data:new-item-text":               { value: "",    valid: "string",  store: true     },
                 "event:new-item-create":            { value: false, valid: "boolean", autoreset: true },
+                "event:item-list-item-modified":    { value: null,  valid: "object",  autoreset: true },
+                "event:item-list-item-removed":     { value: null,  valid: "object",  autoreset: true },
                 "data:status-items-remaining":      { value: 0,     valid: "number"                   },
                 "data:status-items-remaining-unit": { value: "",    valid: "string"                   },
                 "state:status-filter-selected":     { value: "all", valid: "string",  store: true     },
@@ -52,7 +54,10 @@ cs.ns("app.ui.todo").model = cs.clazz({
                 name: "state:all-item-selected",
                 func: function (ev, value) {
                     var items = cs(self).value("data:item-list")
-                    _.forEach(items, function (item) { item.completed = value })
+                    _.forEach(items, function (item) {
+                        item.completed = value 
+                        cs(self).value("event:item-list-item-modified", item.id)
+                    })
                     cs(self).value("cmd:item-list-updated", true)
                 }
             })

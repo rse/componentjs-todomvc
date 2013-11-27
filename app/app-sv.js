@@ -26,7 +26,7 @@ cs.ns("app.sv.dm").TodoList = cs.clazz({
         items: []
     },
     cons: function (obj) {
-        _.assign(this, _.pick(obj, _.values(this)))
+        _.assign(this, _.pick(obj, function (val, key) { return _.has(self, key) }, this))
     },
     protos: {
         itemAdd: function (item) {
@@ -48,9 +48,9 @@ cs.ns("app.sv.dm").TodoList = cs.clazz({
             return _.find(this.items, function (item) { return item.id === id })
         },
         serialize: function () {
-            return JSON.stringify({
-                items: _.map(this.items, function (item) { return item.serialize() })
-            })
+            return ("{\"items\":[" +
+                _.map(this.items, function (item) { return item.serialize() }).join(",") +
+            "]}")
         },
         unserialize: function (text) {
             var obj = JSON.parse(text)
@@ -65,13 +65,13 @@ cs.ns("app.sv.dm").TodoList = cs.clazz({
 cs.ns("app.sv.dm").idCnt = 0
 cs.ns("app.sv.dm").TodoItem = cs.clazz({
     dynamics: {
-        id:        0,
+        id:        "0",
         title:     "",
         completed: false
     },
     cons: function (obj) {
-        this.id = app.sv.dm.idCnt++
-        _.assign(this, _.pick(obj, _.values(this)))
+        this.id = "" + app.sv.dm.idCnt++
+        _.assign(this, _.pick(obj, function (val, key) { return _.has(this, key) }, this))
     },
     protos: {
         serialize: function () {
@@ -79,7 +79,7 @@ cs.ns("app.sv.dm").TodoItem = cs.clazz({
         },
         unserialize: function (text) {
             var obj = JSON.parse(text)
-            _.assign(this, _.pick(obj, _.values(this)))
+            _.assign(this, _.pick(obj, function (val, key) { return _.has(self, key) }, this))
         }
     }
 })

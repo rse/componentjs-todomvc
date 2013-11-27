@@ -21,6 +21,7 @@ cs.ns("app.ui.todo").view = cs.clazz({
             $("#new-todo").keyup(function (/* ev */) {
                 cs(self).value("data:new-item-text", $("#new-todo").val())
             }).change(function (/* ev */) {
+                cs(self).value("data:new-item-text", $("#new-todo").val())
                 cs(self).value("event:new-item-create", true)
             })
             cs(self).observe({
@@ -65,28 +66,34 @@ cs.ns("app.ui.todo").view = cs.clazz({
                             blur(ev.target, true)
                     })
                     var blur = function (el, takeTitle) {
-                        var id = $(el).parent().data("id")
+                        var id = $(el).parent().data("id") + ""
                         $(el).parent().removeClass("editing")
                         if (takeTitle) {
-                            _.find(items, function (item) { return item.id === id }).title = $(el).val()
+                            var items  = cs(self).value("data:item-list")
+                            var item = _.find(items, function (item) { return item.id === id })
+                            item.title = $(el).val()
+                            cs(self).value("event:item-list-item-modified", item)
                             cs(self).value("cmd:item-list-updated", true)
                         }
                     }
 
                     /*  one-way bind click interaction to toggle item completion  */
                     $("#todo-list input.toggle", ui).click(function (ev) {
-                        var id = $(ev.target).parent().parent().data("id")
+                        var id = $(ev.target).parent().parent().data("id") + ""
+                        var items = cs(self).value("data:item-list")
                         var item = _.find(items, function (item) { return item.id === id })
                         item.completed = !item.completed
+                        cs(self).value("event:item-list-item-modified", item)
                         cs(self).value("cmd:item-list-updated", true)
                     })
 
                     /*  one-way bind click interaction to remove item  */
                     $("#todo-list button.destroy", ui).click(function (ev) {
-                        var id = $(ev.target).parent().parent().data("id")
-                        cs(self).value("data:item-list", _.filter(items, function (item) {
-                            return item.id !== id;
-                        }))
+                        var id = $(ev.target).parent().parent().data("id") + ""
+                        var items = cs(self).value("data:item-list")
+                        var item = _.find(items, function (item) { return item.id === id })
+                        cs(self).value("data:item-list", _.without(items, item))
+                        cs(self).value("event:item-list-item-removed", item)
                         cs(self).value("cmd:item-list-updated", true)
                     })
                 }
@@ -133,8 +140,9 @@ cs.ns("app.ui.todo").view = cs.clazz({
                 }
             })
             $("#clear-completed", ui).click(function (/* ev */) {
-                cs(self).value("data:item-list", _.filter(cs(self).value("data:item-list"), function (item) {
-                    return !item.completed;
+                var items = cs(self).value("data:item-list")
+                cs(self).value("data:item-list", _.filter(items, function (item) {
+                    return !item.completed
                 }))
                 cs(self).value("cmd:item-list-updated", true)
             })
