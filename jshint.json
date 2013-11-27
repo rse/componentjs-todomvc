@@ -33,6 +33,7 @@
         "$": false,
         "localStorage": false,
         "document": false,
+        "window": false,
         "Router": false
     }
 }

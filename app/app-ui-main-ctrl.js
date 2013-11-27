@@ -6,8 +6,8 @@ cs.ns("app.ui.main").ctrl = cs.clazz({
         create: function () {
             /*  create companion model and view components
                 plus the components of the todo widget  */
-            cs(this).create("main-model/main-view/todo-model/todo-view", 
-                app.ui.main.model, app.ui.main.view, 
+            cs(this).create("main-model/main-view/todo-model/todo-view",
+                app.ui.main.model, app.ui.main.view,
                 app.ui.todo.model, app.ui.todo.view
             )
             cs(this).property("ComponentJS:state-auto-increase", true)
