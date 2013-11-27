@@ -13,7 +13,7 @@ cs.ns("app.ui.todo").view = cs.clazz({
                 cs(self).value("state:all-item-selected", $("#toggle-all").prop("checked"))
             })
             cs(self).observe({
-                name: "state:all-item-selected", touch: true, spool: "materialized",
+                name: "state:all-item-selected", spool: "materialized",
                 func: function (ev, value) { $("#toggle-all").prop("checked", value) }
             })
 
