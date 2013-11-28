@@ -67,6 +67,17 @@ module.exports = function (grunt) {
             gruntfile: [ "Gruntfile.js" ],
             "src": [ "app/**/*.js" ]
         },
+        complexity: {
+            generic: {
+                src: [ "app/**/*.js" ],
+                options: {
+                    errorsOnly:      false,
+                    cyclomatic:      3,
+                    halstead:        14,
+                    maintainability: 80
+                }
+            }
+        },
         connect: {
             server: {
                 options: {
@@ -92,14 +103,15 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks("grunt-bower-install-simple");
+    grunt.loadNpmTasks("grunt-complexity");
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-contrib-connect");
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-contrib-clean");
 
-    grunt.registerTask("default", [ "build", "dev" ];
-    grunt.registerTask("build",   [ "bower-install-simple", "copy", "jshint" ]);
+    grunt.registerTask("default", [ "build", "dev" ]);
+    grunt.registerTask("build",   [ "bower-install-simple", "copy", "jshint", "complexity" ]);
     grunt.registerTask("dev",     [ "connect", "watch" ]);
 };
 
