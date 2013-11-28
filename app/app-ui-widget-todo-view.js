@@ -21,7 +21,8 @@ cs.ns("app.ui.widget.todo").view = cs.clazz({
             $("#new-todo").keyup(function (/* ev */) {
                 cs(self).value("data:new-item-text", $("#new-todo").val())
             }).change(function (/* ev */) {
-                cs(self).value("data:new-item-text", $("#new-todo").val())
+                var value = $("#new-todo").val().trim()
+                cs(self).value("data:new-item-text", value)
                 cs(self).value("event:new-item-create", true)
             })
             cs(self).observe({
