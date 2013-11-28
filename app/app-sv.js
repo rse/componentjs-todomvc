@@ -1,5 +1,5 @@
 
-/*  service facade  */
+/*  service tier  */
 cs.ns("app").sv = new cs.clazz({
     dynamics: { todoList: null, storageId: "todos-componentjs" },
     protos: {

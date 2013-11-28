@@ -1,5 +1,5 @@
 
-/*  bootstrap code  */
+/*  application bootstrap class  */
 ComponentJS.symbol("cs")
 cs.ns("app").boot = cs.clazz({
     statics: {

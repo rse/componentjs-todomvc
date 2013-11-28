@@ -1,4 +1,5 @@
 
+/*  view component of the "todo" UI widget  */
 cs.ns("app.ui.widget.todo").view = cs.clazz({
     mixin: [ cs.marker.view ],
     protos: {

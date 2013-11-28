@@ -1,4 +1,5 @@
 
+/*  model component of the "todo" UI widget  */
 cs.ns("app.ui.widget.todo").model = cs.clazz({
     mixin: [ cs.marker.model ],
     protos: {

@@ -1,5 +1,5 @@
 
-/*  the main UI composite component  */
+/*  component of the "main" UI composite  */
 cs.ns("app.ui.composite").main = cs.clazz({
     mixin: [ cs.marker.controller, cs.marker.view ],
     protos: {
