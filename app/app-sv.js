@@ -1,17 +1,17 @@
 
 /*  service facade  */
 cs.ns("app").sv = new cs.clazz({
-    dynamics: { todoList: null },
+    dynamics: { todoList: null, storageId: "todomvc-componentjs" },
     protos: {
         todo: function () { return this.todoList },
         load: function () {
             this.todoList = new app.dm.TodoList()
-            if (_.has(localStorage, "todomvc-componentjs"))
-                this.todoList.unserialize(localStorage["todomvc-componentjs"])
+            if (_.has(localStorage, this.storageId))
+                this.todoList.unserialize(localStorage[this.storageId])
         },
         save: function () {
             if (this.todoList !== null)
-                localStorage["todomvc-componentjs"] = this.todoList.serialize()
+                localStorage[this.storageId] = this.todoList.serialize()
         }
     }
 })()
