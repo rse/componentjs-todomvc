@@ -98,7 +98,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-contrib-clean");
 
-    grunt.registerTask("default", [ "bower-install-simple", "copy", "jshint" ]);
+    grunt.registerTask("default", [ "build", "dev" ];
+    grunt.registerTask("build",   [ "bower-install-simple", "copy", "jshint" ]);
     grunt.registerTask("dev",     [ "connect", "watch" ]);
 };
 
