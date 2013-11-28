@@ -1,6 +1,6 @@
 
 /*  the root UI composite component  */
-cs.ns("app.ui").root = cs.clazz({
+cs.ns("app.ui.composite").root = cs.clazz({
     mixin: [ cs.marker.view, cs.marker.controller ],
     protos: {
         create: function () {
@@ -36,8 +36,3 @@ cs.ns("app.ui").root = cs.clazz({
     }
 })
 
-/*  just some constants  */
-cs.ns("app.ui").constants = {
-    KEY_ENTER:  13,
-    KEY_ESCAPE: 27
-};

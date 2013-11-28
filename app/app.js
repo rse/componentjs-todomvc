@@ -17,7 +17,7 @@ cs.ns("app").boot = cs.clazz({
         },
         main: function () {
             /*  fire up the component tree  */
-            cs.create("/ui", app.ui.root)
+            cs.create("/ui", app.ui.composite.root)
             cs("/ui").state(_.isObject(document) ? "visible" : "prepared")
         }
     }

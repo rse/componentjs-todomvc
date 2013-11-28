@@ -5,7 +5,7 @@ cs.ns("app.ui.main").ctrl = cs.clazz({
     protos: {
         create: function () {
             /*  create todo widget components  */
-            cs(this).create("todo-model/todo-view", app.ui.todo.model, app.ui.todo.view)
+            cs(this).create("todo-model/todo-view", app.ui.widget.todo.model, app.ui.widget.todo.view)
             cs(this).property("ComponentJS:state-auto-increase", true)
         },
         prepare: function () {

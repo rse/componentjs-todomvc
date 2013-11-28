@@ -1,5 +1,5 @@
 
-cs.ns("app.ui.todo").model = cs.clazz({
+cs.ns("app.ui.widget.todo").model = cs.clazz({
     mixin: [ cs.marker.model ],
     protos: {
         create: function () {
