@@ -10,7 +10,8 @@ cs.ns("app.ui.widget.todo").view = cs.clazz({
 
             /*  two-way bind the "all items" selection checkbox  */
             $("#toggle-all").change(function (/* ev */) {
-                cs(self).value("state:all-item-selected", $("#toggle-all").prop("checked"))
+                console.log("change", $("#toggle-all").prop("checked"))
+                cs(self).value("event:all-item-select", $("#toggle-all").prop("checked"), true)
             })
             cs(self).observe({
                 name: "state:all-item-selected", spool: "materialized",
@@ -23,7 +24,7 @@ cs.ns("app.ui.widget.todo").view = cs.clazz({
             }).change(function (/* ev */) {
                 var value = $("#new-todo").val().trim()
                 cs(self).value("data:new-item-text", value)
-                cs(self).value("event:new-item-create", true)
+                cs(self).value("event:new-item-create", true, true)
             })
             cs(self).observe({
                 name: "data:new-item-text", touch: true, spool: "materialized",
@@ -80,7 +81,7 @@ cs.ns("app.ui.widget.todo").view = cs.clazz({
                             var item = _.find(items, function (item) { return item.id === id })
                             item.title = $(el).val()
                             cs(self).value("event:item-list-item-modified", item)
-                            cs(self).value("cmd:item-list-updated", true)
+                            cs(self).value("cmd:item-list-updated", true, true)
                         }
                     }
 
@@ -90,8 +91,8 @@ cs.ns("app.ui.widget.todo").view = cs.clazz({
                         var items = cs(self).value("data:item-list")
                         var item = _.find(items, function (item) { return item.id === id })
                         item.completed = !item.completed
-                        cs(self).value("event:item-list-item-modified", item)
-                        cs(self).value("cmd:item-list-updated", true)
+                        cs(self).value("event:item-list-item-modified", item, true)
+                        cs(self).value("cmd:item-list-updated", true, true)
                     })
 
                     /*  one-way bind click interaction to remove item  */
@@ -100,8 +101,8 @@ cs.ns("app.ui.widget.todo").view = cs.clazz({
                         var items = cs(self).value("data:item-list")
                         var item = _.find(items, function (item) { return item.id === id })
                         cs(self).value("data:item-list", _.without(items, item))
-                        cs(self).value("event:item-list-item-removed", item)
-                        cs(self).value("cmd:item-list-updated", true)
+                        cs(self).value("event:item-list-item-removed", item, true)
+                        cs(self).value("cmd:item-list-updated", true, true)
                     })
                 }
             })
@@ -128,8 +129,8 @@ cs.ns("app.ui.widget.todo").view = cs.clazz({
                 }
             })
             $("*[data-bind='state:status-filter-selected'] > li > a", ui).click(function (ev) {
-                cs(self).value("event:status-filter-select", $(ev.target).data("tag"))
-                cs(self).value("cmd:item-list-updated", true)
+                cs(self).value("event:status-filter-select", $(ev.target).data("tag"), true)
+                cs(self).value("cmd:item-list-updated", true, true)
                 return false
             })
 
@@ -150,12 +151,12 @@ cs.ns("app.ui.widget.todo").view = cs.clazz({
                 var items = cs(self).value("data:item-list")
                 _.forEach(items, function (item) {
                     if (item.completed)
-                        cs(self).value("event:item-list-item-removed", item)
+                        cs(self).value("event:item-list-item-removed", item, true)
                 })
                 cs(self).value("data:item-list", _.filter(items, function (item) {
                     return !item.completed
                 }))
-                cs(self).value("cmd:item-list-updated", true)
+                cs(self).value("cmd:item-list-updated", true, true)
             })
 
         }

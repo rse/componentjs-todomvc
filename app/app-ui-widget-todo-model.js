@@ -12,6 +12,7 @@ cs.ns("app.ui.widget.todo").model = cs.clazz({
                                                              "   editing: boolean   }*]"              },
                 "cmd:item-list-updated":            { value: false, valid: "boolean", autoreset: true },
                 "state:all-item-selected":          { value: false, valid: "boolean"                  },
+                "event:all-item-select":            { value: false, valid: "boolean", autoreset: true },
                 "data:new-item-text":               { value: "",    valid: "string",  store: true     },
                 "event:new-item-create":            { value: false, valid: "boolean", autoreset: true },
                 "event:item-list-item-modified":    { value: null,  valid: "object",  autoreset: true },
@@ -46,19 +47,28 @@ cs.ns("app.ui.widget.todo").model = cs.clazz({
                     var remaining = items.length - completed
                     cs(self).value("data:status-items-completed", completed)
                     cs(self).value("data:status-items-remaining", remaining)
+                    if (remaining === 0 && completed > 0)
+                        cs(self).value("state:all-item-selected", true)
+                    else if (remaining > 0)
+                        cs(self).value("state:all-item-selected", false)
                 }
             })
 
             /*  presentation logic: implement "all item selected"  */
             cs(self).observe({
-                name: "state:all-item-selected",
+                name: "event:all-item-select",
                 func: function (ev, value) {
                     var items = cs(self).value("data:item-list")
+                    var modified = false
                     _.forEach(items, function (item) {
-                        item.completed = value
-                        cs(self).value("event:item-list-item-modified", item.id)
+                        if (item.completed !== value) {
+                            item.completed = value
+                            cs(self).value("event:item-list-item-modified", item, true)
+                            modified = true
+                        }
                     })
-                    cs(self).value("cmd:item-list-updated", true)
+                    if (modified)
+                        cs(self).value("cmd:item-list-updated", true, true)
                 }
             })
         }
