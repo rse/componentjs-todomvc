@@ -48,6 +48,12 @@ cs.ns("app.ui.widget.todo").view = cs.clazz({
                         }
                     }
 
+                    /*  show/hide the footer accordingly  */
+                    if (items.length === 0)
+                        $("#footer").addClass("hidden")
+                    else
+                        $("#footer").removeClass("hidden")
+
                     /*  one-way bind double-click interaction onto all items to start editing mode  */
                     $("#todo-list .view label", ui).bind("dblclick", function (ev) {
                         var title = $(ev.target).text()
