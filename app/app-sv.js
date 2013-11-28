@@ -20,7 +20,7 @@ cs.ns("app.sv").sf = new cs.clazz({
 cs.ns("app.sv.dm").TodoList = cs.clazz({
     dynamics: { items: [] },
     cons: function (obj) {
-        _.assign(this, _.pick(obj, function (val, key) { return _.has(self, key) }, this))
+        _.assign(this, _.pick(obj, function (val, key) { return _.has(this, key) }, this))
     },
     protos: {
         itemAdd:  function (item) { this.items.push(item) },
@@ -54,7 +54,7 @@ cs.ns("app.sv.dm").TodoItem = cs.clazz({
         },
         unserialize: function (text) {
             var obj = JSON.parse(text)
-            _.assign(this, _.pick(obj, function (val, key) { return _.has(self, key) }, this))
+            _.assign(this, _.pick(obj, function (val, key) { return _.has(this, key) }, this))
         }
     }
 })

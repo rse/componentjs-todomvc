@@ -55,7 +55,7 @@ cs.ns("app.ui.todo").model = cs.clazz({
                 func: function (ev, value) {
                     var items = cs(self).value("data:item-list")
                     _.forEach(items, function (item) {
-                        item.completed = value 
+                        item.completed = value
                         cs(self).value("event:item-list-item-modified", item.id)
                     })
                     cs(self).value("cmd:item-list-updated", true)
