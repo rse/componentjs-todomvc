@@ -1,6 +1,6 @@
 
 /*  data model: Todo List entity  */
-cs.ns("app.sv.dm").TodoList = cs.clazz({
+cs.ns("app.dm").TodoList = cs.clazz({
     dynamics: { items: [] },
     cons: function (obj) {
         _.assign(this, _.pick(obj, function (val, key) { return _.has(this, key) }, this))
@@ -17,18 +17,18 @@ cs.ns("app.sv.dm").TodoList = cs.clazz({
         unserialize: function (text) {
             var obj = JSON.parse(text)
             this.items = _.map(obj.items, function (item) {
-                return new app.sv.dm.TodoItem(item)
+                return new app.dm.TodoItem(item)
             })
         }
     }
 })
 
 /*  data model: Todo Item entity  */
-cs.ns("app.sv.dm").idCnt = 0
-cs.ns("app.sv.dm").TodoItem = cs.clazz({
+cs.ns("app.dm").idCnt = 0
+cs.ns("app.dm").TodoItem = cs.clazz({
     dynamics: { id: "0", title: "", completed: false },
     cons: function (obj) {
-        this.id = "" + app.sv.dm.idCnt++
+        this.id = "" + app.dm.idCnt++
         _.assign(this, _.pick(obj, function (val, key) { return _.has(this, key) }, this))
     },
     protos: {

@@ -1,11 +1,11 @@
 
 /*  the root UI composite component  */
 cs.ns("app.ui.composite").root = cs.clazz({
-    mixin: [ cs.marker.view, cs.marker.controller ],
+    mixin: [ cs.marker.controller, cs.marker.view ],
     protos: {
         create: function () {
             /*  create main composite component  */
-            cs(this).create("main", app.ui.main.ctrl)
+            cs(this).create("main", app.ui.composite.main)
             cs(this).property("ComponentJS:state-auto-increase", true)
         },
         prepare: function () {

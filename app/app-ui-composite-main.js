@@ -1,7 +1,7 @@
 
 /*  the main UI composite component  */
-cs.ns("app.ui.main").ctrl = cs.clazz({
-    mixin: [ cs.marker.controller ],
+cs.ns("app.ui.composite").main = cs.clazz({
+    mixin: [ cs.marker.controller, cs.marker.view ],
     protos: {
         create: function () {
             /*  create todo widget components  */
@@ -37,32 +37,32 @@ cs.ns("app.ui.main").ctrl = cs.clazz({
             todoModel.observe({ name: "event:new-item-create", func: function (/* ev, value */) {
                 var text = todoModel.value("data:new-item-text")
                 todoModel.value("data:new-item-text", "")
-                var todoList = app.sv.sf.todo()
-                var todoItem = new app.sv.dm.TodoItem({ title: text })
+                var todoList = app.sv.todo()
+                var todoItem = new app.dm.TodoItem({ title: text })
                 todoList.itemAdd(todoItem)
-                app.sv.sf.save()
+                app.sv.save()
                 bm2pm()
             }})
             todoModel.observe({ name: "event:item-list-item-modified", func: function (ev, item) {
-                var todoList = app.sv.sf.todo()
+                var todoList = app.sv.todo()
                 var todoItem = todoList.itemById(item.id)
                 todoItem.title     = item.title
                 todoItem.completed = item.completed
-                app.sv.sf.save()
+                app.sv.save()
                 bm2pm()
             }})
             todoModel.observe({ name: "event:item-list-item-removed", func: function (ev, item) {
-                var todoList = app.sv.sf.todo()
+                var todoList = app.sv.todo()
                 var todoItem = todoList.itemById(item.id)
                 todoList.itemDel(todoItem)
-                app.sv.sf.save()
+                app.sv.save()
                 bm2pm()
             }})
 
             /*  transfer business model into presentation model  */
             var bm2pm = function () {
                 var pmItems = []
-                var bmTodoList = app.sv.sf.todo()
+                var bmTodoList = app.sv.todo()
                 _.forEach(bmTodoList.items, function (bmTodoItem) {
                     pmItems.push({
                         id:        bmTodoItem.id,
@@ -76,7 +76,7 @@ cs.ns("app.ui.main").ctrl = cs.clazz({
             }
 
             /*  initially load business model and trigger transfer into presentation model  */
-            app.sv.sf.load()
+            app.sv.load()
             bm2pm()
         },
         render: function () {
