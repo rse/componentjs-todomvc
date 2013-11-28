@@ -141,6 +141,10 @@ cs.ns("app.ui.todo").view = cs.clazz({
             })
             $("#clear-completed", ui).click(function (/* ev */) {
                 var items = cs(self).value("data:item-list")
+                _.forEach(items, function (item) {
+                    if (item.completed)
+                        cs(self).value("event:item-list-item-removed", item)
+                })
                 cs(self).value("data:item-list", _.filter(items, function (item) {
                     return !item.completed
                 }))
