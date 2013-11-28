@@ -22,7 +22,7 @@ Perform the following steps:
 2. Install build-time dependencies via [NPM](http://npmjs.org/): `npm install`
 3. Install run-time dependencies via [Grunt](http://gruntjs.com/) and [Bower](http://bower.io/): `grunt build`
 3. Run development environment via [Grunt](http://gruntjs.com/) and [Connect](http://www.senchalabs.org/connect/): `grunt dev`
-4. Test-drive the ComponentJS TodoMVC Example: http://localhost:8080/
+4. Test-drive the ComponentJS TodoMVC Example: [http://localhost:8080/](http://localhost:8080/)
 
 ## Learning ComponentJS
 
