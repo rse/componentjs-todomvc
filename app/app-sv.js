@@ -1,7 +1,7 @@
 
 /*  service facade  */
 cs.ns("app").sv = new cs.clazz({
-    dynamics: { todoList: null, storageId: "todomvc-componentjs" },
+    dynamics: { todoList: null, storageId: "todos-componentjs" },
     protos: {
         todo: function () { return this.todoList },
         load: function () {
