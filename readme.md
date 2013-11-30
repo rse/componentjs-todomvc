@@ -1,6 +1,8 @@
 
 # ComponentJS TodoMVC Example
 
+Run: [http://rse.github.io/componentjs-todomvc](http://rse.github.io/componentjs-todomvc)
+
 ## About ComponentJS
 
 > ComponentJS is a stand-alone MPL-licensed Open Source library for
