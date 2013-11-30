@@ -31,7 +31,7 @@ closely follow the official [TodoMVC App Specification](https://github.com/taste
 as long as there are no conflicting ComponentJS best practices.
 The known resolved conflicts were:
 
-- TodoMVC''s `todo-common` provides a `base.css` which was not
+- TodoMVC `todo-common` provides a `base.css` which was not
   directly used within this ComponentJS TodoMVC Example. There
   are two reasons for this:
   
