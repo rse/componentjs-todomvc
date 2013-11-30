@@ -1,8 +1,6 @@
 
 # ComponentJS TodoMVC Example
 
-Run: [http://rse.github.io/componentjs-todomvc](http://rse.github.io/componentjs-todomvc)
-
 ## About ComponentJS
 
 > ComponentJS is a stand-alone MPL-licensed Open Source library for
@@ -18,7 +16,11 @@ independent and agnostic of the particular UI widget toolkit.
 
 ## Running the ComponentJS TodoMVC Example
 
-Perform the following steps:
+Either run it directly from Github:
+
+[http://rse.github.io/componentjs-todomvc](http://rse.github.io/componentjs-todomvc)
+
+Or perform the following steps to run it locally:
 
 1. Install [Node](http://nodejs.org/) into your system
 2. Install build-time dependencies via [NPM](http://npmjs.org/): `npm install`
