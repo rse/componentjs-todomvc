@@ -1,7 +1,7 @@
 
 html,
 body {
-	margin: 0;
-	padding: 0;
-	background: #eaeaea url("app-ui-composite-root-style-bg.png");
+    margin: 0;
+    padding: 0;
+    background: #eaeaea url("../lib/todomvc-common-bg.png");
 }
