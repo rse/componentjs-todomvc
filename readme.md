@@ -72,12 +72,13 @@ The known resolved conflicts were:
   the help of the `component.plugin.localstorage.js` plugin. While
   sufficient and perhaps acceptable for a trivial use case like the
   TodoMVC, it is not for a larger application. There the URL routing
-  would be done by a component which has the while UI as the scope
-  (the `root` and `main` components but not the `todo` widget) and
-  the Todo items would come from an underlying service tier and its
-  UI-independent data model. We decided to already use this architecture
-  for the trivial TodoMVC use case, even if it increases the total
-  amount of required code noticably.
+  should be done only by a component which has the whole UI as the
+  scope (the `root` and `main` components but not the `todo` widget)
+  and the Todo items would come from an underlying service tier and its
+  UI-independent Business Model (while the UI widget uses a so-called
+  Presentation Model). We decided to already use this architecture for
+  the trivial TodoMVC use case, even if it increases the total amount of
+  required code.
 
 ## Learning ComponentJS
 
