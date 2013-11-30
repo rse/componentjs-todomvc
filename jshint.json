@@ -34,6 +34,7 @@
         "localStorage": false,
         "document": false,
         "window": false,
-        "Router": false
+        "Router": false,
+        "UUIDjs": false
     }
 }
