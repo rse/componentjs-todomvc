@@ -35,23 +35,23 @@ The known resolved conflicts were:
   directly used within this ComponentJS TodoMVC Example. There
   are two reasons for this:
   
-    1. The `base.css` provides all styles of the TodoMVC application
-       in one single file, while in ComponentJS-based applications
-       the styles are local to the components which create the
-       corresponding DOM elements. In ComponentJS TodoMVC Example
-       we have three such components (`root`, `main` and `todo`)
-       and hence the `base.css` was split into three parts accordingly, too.
+    - The `base.css` provides all styles of the TodoMVC application
+      in one single file, while in ComponentJS-based applications
+      the styles are local to the components which create the
+      corresponding DOM elements. In ComponentJS TodoMVC Example
+      we have three such components (`root`, `main` and `todo`)
+      and hence the `base.css` was split into three parts accordingly, too.
 
-    2. The styling in `base.css` is mainly based on unique identifiers (`#foo`)
-       instead of classes (`.foo`). This is a big "no-go" for UI
-       approaches like ComponentJS where UI widgets (here the `todo`
-       UI component) are fully reusable and are potentially rendered
-       multiple times into the same DOM tree. For the particular
-       TodoMVC use case this does not happen, but the ComponentJS
-       TodoMVC Example should have been strictly the way things
-       are done in ComponentJS applications. As a result, all CSS
-       selectors of `base.css` were converted from unique identifiers to
-       [BEM](http://bem.info/method/definitions/)-like classes.
+    - The styling in `base.css` is mainly based on unique identifiers (`#foo`)
+      instead of classes (`.foo`). This is a big "no-go" for UI
+      approaches like ComponentJS where UI widgets (here the `todo`
+      UI component) are fully reusable and are potentially rendered
+      multiple times into the same DOM tree. For the particular
+      TodoMVC use case this does not happen, but the ComponentJS
+      TodoMVC Example should have been strictly the way things
+      are done in ComponentJS applications. As a result, all CSS
+      selectors of `base.css` were converted from unique identifiers to
+      [BEM](http://bem.info/method/definitions/)-like classes.
 
 - TodoMVC recommends to group all sources files according to 
   technical classifications. ComponentJS-based applications usually
