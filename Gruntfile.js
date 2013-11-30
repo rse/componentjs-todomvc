@@ -57,6 +57,14 @@ module.exports = function (grunt) {
                     dest:   "lib/"
                 }]
             },
+            "uuid-js": {
+                files: [{
+                    expand: true,
+                    cwd:    "bower_components/uuid-js/lib",
+                    src:    [ "uuid.js" ],
+                    dest:   "lib/"
+                }]
+            },
             "todomvc-common": {
                 files: [{
                     expand: true,

@@ -16,16 +16,13 @@ cs.ns("app.dm").TodoList = cs.clazz({
 
 /*  data model: Todo Item entity  */
 cs.ns("app.dm").TodoItem = cs.clazz({
-    statics: {
-        idCnt: 0
-    },
     dynamics: {
         id: "0",
         title: "",
         completed: false
     },
     cons: function (obj) {
-        this.id = "" + app.dm.TodoItem.idCnt++
+        this.id = UUIDjs.create(1).hex
         _.assign(this, _.pick(obj, function (val, key) { return _.has(this, key) }, this))
     }
 })
