@@ -36,14 +36,16 @@ The known resolved conflicts were:
   directly used within this ComponentJS TodoMVC Example. There
   are two reasons for this:
 
-    - The `base.css` provides all styles of the TodoMVC application
+    - **Single vs. Multiple Files**<br/>
+      The `base.css` provides all styles of the TodoMVC application
       in one single file, while in ComponentJS-based applications
       the styles are local to the components which create the
       corresponding DOM elements. In ComponentJS TodoMVC Example
       we have three such components (`root`, `main` and `todo`)
       and hence the `base.css` was split into three parts accordingly, too.
 
-    - The styling in `base.css` is mainly based on unique identifiers (`#foo`)
+    - **Unique Ids vs. Class Selectors**<br/>
+      The styling in `base.css` is mainly based on unique identifiers (`#foo`)
       instead of classes (`.foo`). This is a big "no-go" for UI
       approaches like ComponentJS where UI widgets (here the `todo`
       UI component) are fully reusable and are potentially rendered
