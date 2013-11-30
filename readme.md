@@ -3,7 +3,7 @@
 
 ## About ComponentJS
 
-ComponentJS is a stand-alone MPL-licensed Open Source library for
+> ComponentJS is a stand-alone MPL-licensed Open Source library for
 JavaScript, providing a powerful Component System for hierarchically
 structuring the User-Interface (UI) dialogs of complex HTML5-based Rich
 Clients (aka Single-Page-Apps) — under maximum applied Separation
@@ -12,7 +12,7 @@ View and Controller component roles, with sophisticated hierarchical
 Event, Service, Hook, Model, Socket and Property mechanisms, and fully
 independent and agnostic of the particular UI widget toolkit.
 
-_[ComponentJS &mdash; componentjs.com](http://componentjs.com)_
+> _[ComponentJS &mdash; componentjs.com](http://componentjs.com)_
 
 ## Running the ComponentJS TodoMVC Example
 
