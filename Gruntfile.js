@@ -57,6 +57,15 @@ module.exports = function (grunt) {
                     dest:   "lib/"
                 }]
             },
+            "todomvc-common": {
+                files: [{
+                    expand: true,
+                    cwd:    "bower_components/todomvc-common",
+                    src:    [ "bg.png", "base.js" ],
+                    rename: function (dest, src) { return dest + "todomvc-common-" + src },
+                    dest:   "lib/"
+                }]
+            },
             options: {
             }
         },
@@ -72,8 +81,8 @@ module.exports = function (grunt) {
                 src: [ "app/**/*.js" ],
                 options: {
                     errorsOnly:      false,
-                    cyclomatic:      3,
-                    halstead:        14,
+                    cyclomatic:      4,
+                    halstead:        16,
                     maintainability: 80
                 }
             }

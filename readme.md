@@ -29,25 +29,55 @@ Perform the following steps:
 This ComponentJS TodoMVC Example tries to
 closely follow the official [TodoMVC App Specification](https://github.com/tastejs/todomvc/blob/gh-pages/app-spec.md)
 as long as there are no conflicting ComponentJS best practices.
-Nevertheless, an important point should be explicitly noted.
+The known resolved conflicts were:
 
-There are multiple TodoMVC comparisons which mainly look at the
-_Lines of Code_ metric to compare the individual examples.
-This IMHO makes no sense, as some examples seem to just try to reproduce
-the TodoMVC functionality with the help of the particular framework, but with a rather rookie software architecture.
-Other implementations are more involved because they strictly follow a software architecture which
-scales even for very large applications. ComponentJS TodoMVC Example
-is in the latter group as the used ComponentJS framework is based on
-a very sophisticated but more involved underlying UI architecture.
+- TodoMVC''s `todo-common` provides a `base.css` which was not
+  directly used within this ComponentJS TodoMVC Example. There
+  are two reasons for this:
+  
+    1. The `base.css` provides all styles of the TodoMVC application
+       in one single file, while in ComponentJS-based applications
+       the styles are local to the components which create the
+       corresponding DOM elements. In ComponentJS TodoMVC Example
+       we have three such components (`root`, `main` and `todo`)
+       and hence the `base.css` was split into three parts accordingly, too.
 
-In particular, this means this ComponentJS TodoMVC Example already uses the
-usual separation between a UI and service tier, already implements the
-Todo list as a fully reusable UI widget, fully abstracts the Todo list
-view in a corresponding Todo list presentation model (which perfectly
-supports even head-less testing approaches), performs a true two-way
-binding between the presentation model and the view mask, etc.
+    2. The styling in `base.css` is mainly based on unique identifiers (`#foo`)
+       instead of classes (`.foo`). This is a big "no-go" for UI
+       approaches like ComponentJS where UI widgets (here the `todo`
+       UI component) are fully reusable and are potentially rendered
+       multiple times into the same DOM tree. For the particular
+       TodoMVC use case this does not happen, but the ComponentJS
+       TodoMVC Example should have been strictly the way things
+       are done in ComponentJS applications. As a result, all CSS
+       selectors of `base.css` were converted from unique identifiers to
+       [BEM](http://bem.info/method/definitions/)-like classes.
 
-_Keep this in mind and do not compare apples and oranges, please!_
+- TodoMVC recommends to group all sources files according to 
+  technical classifications. ComponentJS-based applications usually
+  use a domain-specific classification to group files, i.e., the UI is
+  split into domain-specific components and each component is fully
+  self-contained. This means that each component consists of its own
+  JavaScript code, its own style, its own mask, etc. As the TodoMVC use
+  case is a trivial one, in the ComponentJS TodoMVC example you see this
+  through the common filename prefixes only. In a real-world ComponentJS
+  application one would see this also through the directory tree.
+
+- The TodoMVC application speciification just requires that
+  an URL based routing exists and that the todo list is persistend in
+  the the HTML5 `localStorage`. In order to avoid extra code, one could
+  have implemented this by using FlatIron Director directly within the
+  `todo` component and let ComponentJS implicitly persist the Todo list
+  items into `localStorage` directly from within the `todo` widget with
+  the help of the `component.plugin.localstorage.js` plugin. While
+  sufficient and perhaps acceptable for a trivial use case like the
+  TodoMVC, it is not for a larger application. There the URL routing
+  would be done by a component which has the while UI as the scope
+  (the `root` and `main` components but not the `todo` widget) and
+  the Todo items would come from an underlying service tier and its
+  UI-independent data model. We decided to already use this architecture
+  for the trivial TodoMVC use case, even if it increases the total
+  amount of required code noticably.
 
 ## Learning ComponentJS
 
