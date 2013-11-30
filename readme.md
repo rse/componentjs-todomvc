@@ -24,6 +24,28 @@ Perform the following steps:
 3. Run development environment via [Grunt](http://gruntjs.com/) and [Connect](http://www.senchalabs.org/connect/): `grunt dev`
 4. Test-drive the ComponentJS TodoMVC Example: [http://localhost:8080/](http://localhost:8080/)
 
+## Third-Party Libraries
+
+This ComponentJS TodoMVC Example uses the following libraries and frameworks
+(which are all installed through Bower):
+
+- [ComponentJS](http://componentjs.com/) 1.0.1<br/>
+  The MVC framework.
+- [jQuery](http://jquery.com/) 2.0.3<br/>
+  The DOM manipulation and eventing library.
+- [jQuery-Markup](http://plugins.jquery.com/markup/) 1.0.25<br/>
+  The view mask template integration library.
+- [Nunjucks](http://jlongster.github.io/nunjucks/) 1.0.0<br/>
+  The view mask template engine library.
+- [Flatiron Director](https://github.com/flatiron/director) 1.2.0<br/>
+  The URL routing library.
+- [UUID.js](https://github.com/aurigadl/uuid-js) 0.7.5<br/>
+  The UUID generation library.
+- [Lo-Dash](http://lodash.com/) 2.3.0<br/>
+  The collection utility library.
+- [todomvc-common](https://github.com/tastejs/todomvc-common) 0.1.9<br/>
+  The background image and TodoMVC.com integration code.
+
 ## Hints about the ComponentJS TodoMVC Example
 
 This ComponentJS TodoMVC Example tries to
