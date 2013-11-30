@@ -10,26 +10,25 @@ cs.ns("app.ui.widget.todo").view = cs.clazz({
             cs(self).plug(ui)
 
             /*  two-way bind the "all items" selection checkbox  */
-            $("#toggle-all").change(function (/* ev */) {
-                console.log("change", $("#toggle-all").prop("checked"))
-                cs(self).value("event:all-item-select", $("#toggle-all").prop("checked"), true)
+            $(".todo__toggle-all", ui).change(function (/* ev */) {
+                cs(self).value("event:all-item-select", $(".todo__toggle-all", ui).prop("checked"), true)
             })
             cs(self).observe({
                 name: "state:all-item-selected", spool: "materialized",
-                func: function (ev, value) { $("#toggle-all").prop("checked", value) }
+                func: function (ev, value) { $(".todo__toggle-all", ui).prop("checked", value) }
             })
 
             /*  two-way bind the "new item" text input field  */
-            $("#new-todo").keyup(function (/* ev */) {
-                cs(self).value("data:new-item-text", $("#new-todo").val())
+            $(".todo__new", ui).keyup(function (/* ev */) {
+                cs(self).value("data:new-item-text", $(".todo__new", ui).val())
             }).change(function (/* ev */) {
-                var value = $("#new-todo").val().trim()
+                var value = $(".todo__new", ui).val().trim()
                 cs(self).value("data:new-item-text", value)
                 cs(self).value("event:new-item-create", true, true)
             })
             cs(self).observe({
                 name: "data:new-item-text", touch: true, spool: "materialized",
-                func: function (ev, value) { $("#new-todo").val(value) }
+                func: function (ev, value) { $(".todo__new", ui).val(value) }
             })
 
             /*  two-way bind the list of items  */
@@ -40,24 +39,24 @@ cs.ns("app.ui.widget.todo").view = cs.clazz({
                     var filter = cs(self).value("state:status-filter-selected")
 
                     /*  render item markup for all non-filtered items  */
-                    $("#todo-list", ui).html("")
+                    $(".todo__list", ui).html("")
                     for (var i = 0; i < items.length; i++) {
                         if (    filter === "all"
                             || (filter === "active"    && !items[i].completed)
                             || (filter === "completed" &&  items[i].completed)) {
                             var item = $.markup("todo/item", items[i])
-                            $("#todo-list", ui).append(item)
+                            $(".todo__list", ui).append(item)
                         }
                     }
 
                     /*  show/hide the footer accordingly  */
                     if (items.length === 0)
-                        $("#footer").addClass("hidden")
+                        $(".todo__footer", ui).addClass("hidden")
                     else
-                        $("#footer").removeClass("hidden")
+                        $(".todo__footer", ui).removeClass("hidden")
 
                     /*  one-way bind double-click interaction onto all items to start editing mode  */
-                    $("#todo-list .view label", ui).bind("dblclick", function (ev) {
+                    $(".todo__item--view .todo__label", ui).bind("dblclick", function (ev) {
                         var title = $(ev.target).text()
                         var parent = $(ev.target).parent().parent()
                         parent.addClass("editing")
@@ -65,7 +64,7 @@ cs.ns("app.ui.widget.todo").view = cs.clazz({
                     })
 
                     /*  one-way bind key-press and field blur interactions to leave editing mode  */
-                    $("#todo-list .edit", ui).keyup(function (ev) {
+                    $(".todo__item--edit", ui).keyup(function (ev) {
                         if (ev.which === app.ui.constants.KEY_ENTER)
                             blur(ev.target, true)
                         else if (ev.which === app.ui.constants.KEY_ESCAPE)
@@ -87,7 +86,7 @@ cs.ns("app.ui.widget.todo").view = cs.clazz({
                     }
 
                     /*  one-way bind click interaction to toggle item completion  */
-                    $("#todo-list input.toggle", ui).click(function (ev) {
+                    $(".todo__toggle", ui).click(function (ev) {
                         var id = $(ev.target).parent().parent().data("id") + ""
                         var items = cs(self).value("data:item-list")
                         var item = _.find(items, function (item) { return item.id === id })
@@ -97,7 +96,7 @@ cs.ns("app.ui.widget.todo").view = cs.clazz({
                     })
 
                     /*  one-way bind click interaction to remove item  */
-                    $("#todo-list button.destroy", ui).click(function (ev) {
+                    $(".todo__destroy", ui).click(function (ev) {
                         var id = $(ev.target).parent().parent().data("id") + ""
                         var items = cs(self).value("data:item-list")
                         var item = _.find(items, function (item) { return item.id === id })
@@ -141,14 +140,14 @@ cs.ns("app.ui.widget.todo").view = cs.clazz({
                 spool: "materialized", touch: true,
                 func: function (ev, value) {
                     if (value > 0) {
-                        $("#clear-completed", ui).css("display", "block")
+                        $(".todo__completed", ui).css("display", "block")
                         $("*[data-bind='data:status-items-completed']", ui).text(value)
                     }
                     else
-                        $("#clear-completed", ui).css("display", "none")
+                        $(".todo__completed", ui).css("display", "none")
                 }
             })
-            $("#clear-completed", ui).click(function (/* ev */) {
+            $(".todo__completed", ui).click(function (/* ev */) {
                 var items = cs(self).value("data:item-list")
                 _.forEach(items, function (item) {
                     if (item.completed)
