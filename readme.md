@@ -31,10 +31,11 @@ closely follow the official [TodoMVC App Specification](https://github.com/taste
 as long as there are no conflicting ComponentJS best practices.
 The known resolved conflicts were:
 
-- TodoMVC `todo-common` provides a `base.css` which was not
+- **Component Reusability and CSS Usage**<br/>
+  TodoMVC `todo-common` provides a `base.css` which was not
   directly used within this ComponentJS TodoMVC Example. There
   are two reasons for this:
-  
+
     - The `base.css` provides all styles of the TodoMVC application
       in one single file, while in ComponentJS-based applications
       the styles are local to the components which create the
@@ -53,7 +54,8 @@ The known resolved conflicts were:
       selectors of `base.css` were converted from unique identifiers to
       [BEM](http://bem.info/method/definitions/)-like classes.
 
-- TodoMVC recommends to group all sources files according to 
+- **Source File Grouping**<br/>
+  TodoMVC recommends to group all sources files according to
   technical classifications. ComponentJS-based applications usually
   use a domain-specific classification to group files, i.e., the UI is
   split into domain-specific components and each component is fully
@@ -63,22 +65,34 @@ The known resolved conflicts were:
   through the common filename prefixes only. In a real-world ComponentJS
   application one would see this also through the directory tree.
 
-- The TodoMVC application speciification just requires that
-  an URL based routing exists and that the todo list is persistend in
-  the the HTML5 `localStorage`. In order to avoid extra code, one could
-  have implemented this by using FlatIron Director directly within the
-  `todo` component and let ComponentJS implicitly persist the Todo list
-  items into `localStorage` directly from within the `todo` widget with
-  the help of the `component.plugin.localstorage.js` plugin. While
-  sufficient and perhaps acceptable for a trivial use case like the
-  TodoMVC, it is not for a larger application. There the URL routing
-  should be done only by a component which has the whole UI as the
-  scope (the `root` and `main` components but not the `todo` widget)
-  and the Todo items would come from an underlying service tier and its
-  UI-independent Business Model (while the UI widget uses a so-called
-  Presentation Model). We decided to already use this architecture for
-  the trivial TodoMVC use case, even if it increases the total amount of
-  required code.
+- **URL Routing**<br/>
+  The TodoMVC application speciification just requires that an URL
+  based routing exists. In order to avoid extra code, one could have
+  implemented this by using FlatIron Director directly within the `todo`
+  component and especially just use direct hyperlinks in the view mask.
+  While sufficient and perhaps acceptable for a trivial use case like
+  the TodoMVC, it is not for a larger application. There the URL routing
+  should be done only by a component which has the whole UI as the scope
+  (the `root` and `main` components but not the `todo` widget) and there
+  should be no direct hyperlinks within a single component (as it is not
+  allowd to control the URL of the whole apllication). We use Flatiron
+  Director in the `main` component and perform a two-way binding into
+  the `todo` component.
+
+- **LocalStorage**<br/>
+  The TodoMVC application speciification just requires that the
+  todo list is persistend in the the HTML5 `localStorage`. In
+  order to avoid extra code, one could have implemented this by
+  allowing ComponentJS to implicitly persist the Todo list items into
+  `localStorage` from within the `todo` widget with the help of the
+  `component.plugin.localstorage.js` plugin. While sufficient and
+  perhaps acceptable for a trivial use case like the TodoMVC, it is not
+  for a larger application. There the Todo items would come from an
+  underlying service tier and its UI-independent Business Model (while
+  the UI widget uses a so-called Presentation Model). We decided to
+  already use this strict separation between Presentation and Business
+  model for the trivial TodoMVC use case, even if it increases the total
+  amount of required code, of course.
 
 ## Learning ComponentJS
 
