@@ -23,8 +23,10 @@ cs.ns("app.ui.widget.todo").view = cs.clazz({
                 cs(self).value("data:new-item-text", $(".todo__new", ui).val())
             }).change(function (/* ev */) {
                 var value = $(".todo__new", ui).val().trim()
-                cs(self).value("data:new-item-text", value)
-                cs(self).value("event:new-item-create", true, true)
+                if (value !== "") {
+                    cs(self).value("data:new-item-text", value)
+                    cs(self).value("event:new-item-create", true, true)
+                }
             })
             cs(self).observe({
                 name: "data:new-item-text", touch: true, spool: "materialized",
@@ -50,10 +52,14 @@ cs.ns("app.ui.widget.todo").view = cs.clazz({
                     }
 
                     /*  show/hide the footer accordingly  */
-                    if (items.length === 0)
+                    if (items.length === 0) {
+                        $(".todo__main",   ui).addClass("hidden")
                         $(".todo__footer", ui).addClass("hidden")
-                    else
+                    }
+                    else {
+                        $(".todo__main",   ui).removeClass("hidden")
                         $(".todo__footer", ui).removeClass("hidden")
+                    }
 
                     /*  one-way bind double-click interaction onto all items to start editing mode  */
                     $(".todo__item--view .todo__label", ui).bind("dblclick", function (ev) {
