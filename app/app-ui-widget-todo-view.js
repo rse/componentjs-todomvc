@@ -84,7 +84,7 @@ cs.ns("app.ui.widget.todo").view = cs.clazz({
                         $(el).parent().removeClass("editing")
                         if (takeTitle) {
                             var items  = cs(self).value("data:item-list")
-                            var item = _.find(items, function (item) { return item.id === id })
+                            var item = _.find(items, { id: id })
                             var title = $(el).val().trim()
                             if (title === "") {
                                 cs(self).value("data:item-list", _.without(items, item))
@@ -102,7 +102,7 @@ cs.ns("app.ui.widget.todo").view = cs.clazz({
                     $(".todo__toggle", ui).click(function (ev) {
                         var id = $(ev.target).parent().parent().data("id") + ""
                         var items = cs(self).value("data:item-list")
-                        var item = _.find(items, function (item) { return item.id === id })
+                        var item = _.find(items, { id: id })
                         item.completed = !item.completed
                         cs(self).value("event:item-list-item-modified", item, true)
                         cs(self).value("cmd:item-list-updated", true, true)
@@ -112,7 +112,7 @@ cs.ns("app.ui.widget.todo").view = cs.clazz({
                     $(".todo__destroy", ui).click(function (ev) {
                         var id = $(ev.target).parent().parent().data("id") + ""
                         var items = cs(self).value("data:item-list")
-                        var item = _.find(items, function (item) { return item.id === id })
+                        var item = _.find(items, { id: id })
                         cs(self).value("data:item-list", _.without(items, item))
                         cs(self).value("event:item-list-item-removed", item, true)
                         cs(self).value("cmd:item-list-updated", true, true)
