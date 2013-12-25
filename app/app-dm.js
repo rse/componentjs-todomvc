@@ -10,7 +10,7 @@ cs.ns("app.dm").TodoList = cs.clazz({
     protos: {
         itemAdd:  function (item) { this.items.push(item) },
         itemDel:  function (item) { this.items = _.without(this.items, item) },
-        itemById: function (id)   { return _.find(this.items, function (item) { return item.id === id }) },
+        itemById: function (id)   { return _.find(this.items, { id: id }) }
     }
 })
 
