@@ -127,7 +127,8 @@ cs.ns("app.ui.widget.todo").view = cs.clazz({
                 func: function (ev, value) {
                     $("*[data-bind='data:status-items-remaining']", ui).text(value)
                     $("*[data-bind='data:status-items-remaining-unit']", ui).text(
-                        parseInt(value) === 1 ? "item" : "items")
+                        cs(self).value("data:status-items-remaining-unit")
+                    )
                 }
             })
 
