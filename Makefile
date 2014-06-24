@@ -10,22 +10,14 @@ bootstrap:
 build: bootstrap
 	@$(GRUNT)
 
-test: build
-	@$(GRUNT) test
-cover: build
-	@$(GRUNT) cover
-complexity: build
-	@$(GRUNT) complexity
-
-release: bootstrap
-	@$(GRUNT) release
-snapshot: bootstrap
-	@$(GRUNT) snapshot
+server: build
+	@$(GRUNT) connect:server:keepalive
 
 clean: bootstrap
-	@$(GRUNT) cleanup
-distclean: clean
-	-rm -rf node_modules
+	@$(GRUNT) clean:clean
+
+distclean: bootstrap
+	@$(GRUNT) clean:clean clean:distclean
 
 update-package-json: bootstrap
 	$(NPM) install npm-check-updates
